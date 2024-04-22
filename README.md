@@ -1,4 +1,4 @@
-# TubeKids Frontend
+# TubeKids Pro Frontend
 
 This project is part of the Web Environment Programming II course (Code: ISW-711) at Universidad Técnica Nacional, under the direction of Professor Bladimir Arroyo.
 

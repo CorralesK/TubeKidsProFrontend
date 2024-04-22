@@ -80,6 +80,7 @@ if (context == 's') {
             lastName: document.getElementById('last-name').value,
             country: document.getElementById('country').value,
             dateOfBirth: document.getElementById('date-birth').value,
+            phoneNumber: document.getElementById('phone-code').value + document.getElementById('phone-number').value.replace(/\s/g, '')
         };
 
         await register(data)

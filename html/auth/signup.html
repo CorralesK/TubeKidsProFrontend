@@ -23,7 +23,7 @@
 
     <div class="container">
         <div class="row justify-content-center pt-3">
-            <div class="col-md-9">
+            <div class="col-md-6">
                 <div class="card register-form">
                     <div class="card-body bg-black">
                         <h2 class="card-title text-center mb-4">Registro</h2>
@@ -69,22 +69,23 @@
                                             contraseñas no coinciden. </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-4">
                                         <label for="country" class="form-label">País</label>
-                                        <select class="form-select bg-transparent text-light" id="country">
+                                        <select class="form-select bg-black text-light" id="country">
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-5 mb-4">
                                     <label for="phone" class="form-label">Número de teléfono</label>
                                     <div class="input-group">
-                                        <select class="form-select bg-transparent text-light" id="phone-code">
+                                        <select class="bg-black text-light input-group-text" id="phone-code">
+                                            <option value="+506">+506</option>
                                         </select>
-                                        <input type="tel" class="form-control bg-transparent text-light"
+                                        <input type="number" class="form-control bg-transparent text-light"
                                             id="phone-number" placeholder="Ingrese su número de teléfono"
-                                            pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
-                                    </div>
+                                            pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" minlength="8" aria-describedby="basic-addon1" required>
+                                    </div>                                                                        
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-4">

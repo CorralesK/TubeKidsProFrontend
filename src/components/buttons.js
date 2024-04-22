@@ -88,7 +88,7 @@ const renderEditDeleteButtons = (id) => {
 /**
  * Creates and appends a button to add a video.
  */
-const renderAddVideoButton = () => {
+const renderAddButton = (url) => {
     // Create a section element for the manager button
     const section = document.createElement('div');
     section.className = "d-flex justify-content-end";
@@ -97,8 +97,8 @@ const renderAddVideoButton = () => {
     const button = document.createElement('a');
     button.className = "btn btn-outline-success";
     button.id = "add-btn";
-    button.href = "http://127.0.0.1:5500/html/videos/playlist.html?c=f";
-    button.textContent = "Añadir  video";
+    button.href = url;
+    button.textContent = "Añadir";
 
     // Append button to section
     section.appendChild(button);

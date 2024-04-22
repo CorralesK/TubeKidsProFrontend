@@ -7,10 +7,10 @@ if (context == "v") {
         container.innerHTML = "";
         renderNavManager();
 
-        await getAllVideos(getID())
+        await getAllVideos(getKey())
             .then(playlist => {
                 renderHeader("Playlist " + playlist.name);
-                renderAddVideoButton();
+                renderAddButton("http://127.0.0.1:5500/html/videos/playlist.html?c=f&key=" + getKey());
 
                 renderPlaylist(playlist.videos);
                 const videos = document.querySelectorAll('.card-video');
@@ -25,13 +25,8 @@ if (context == "v") {
                 }
             })
             .catch(error => {
-                if (error.status == 404) {
-                    document.getElementById("message").style.display = 'block';
-                    document.getElementById("message").textContent = "No hay videos registrados para esta cuenta";
-                } else {
-                    console.log(error)
-                    errorContainer.innerHTML = '<div class="alert alert-danger"> Algo ha salido mal. Vuelva a intentarlo más tarde. </div>';
-                }
+                document.getElementById("message").style.display = 'block';
+                document.getElementById("message").textContent = "No hay videos registrados para esta cuenta";
             });
     }
 
@@ -44,7 +39,7 @@ if (context == "v") {
  * @param {string} id Video ID for editing.
  */
 const redirectEdit = (id) => {
-    window.location.href = "http://127.0.0.1:5500/html/videos/playlist.html?c=f&id=" + id;
+    document.location.href = "http://127.0.0.1:5500/html/videos/playlist.html?c=f&id=" + id + "&key=" + getKey();
 }
 
 /**

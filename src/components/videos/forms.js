@@ -1,4 +1,3 @@
-
 /**
  * Generates and appends the video form to the container.
  */
@@ -12,7 +11,7 @@ const renderFormVideo = () => {
     const formVideo = document.createElement('form');
     formVideo.id = "video-form";
 
-    //Create section of  video name
+    //Create section of video name
     const sectionName = document.createElement('div');
     sectionName.className = "mb-3";
 
@@ -33,7 +32,7 @@ const renderFormVideo = () => {
     sectionName.appendChild(inputName);
     formVideo.appendChild(sectionName);
 
-    //Create section of  video url
+    //Create section of video url
     const sectionURL = document.createElement('div');
     sectionURL.className = "mb-3";
 
@@ -54,27 +53,47 @@ const renderFormVideo = () => {
     sectionURL.appendChild(inputURL);
 
     //Menssage error
-    const  messageError = document.createElement('p');
+    const messageError = document.createElement('p');
     messageError.className = "text-danger";
-    messageError.style.display="none";
-    messageError.id ="urlError"
+    messageError.style.display = "none";
+    messageError.id = "urlError";
     messageError.innerText = "Solo se permiten URL de YouTube.";
     sectionURL.appendChild(messageError);
 
     formVideo.appendChild(sectionURL);
 
+    //Create section of video description
+    const sectionDescription = document.createElement('div');
+    sectionDescription.className = "mb-3";
+
+    const labelDescription = document.createElement('label');
+    labelDescription.setAttribute("for", "description");
+    labelDescription.className = "form-label";
+    labelDescription.innerText = "Descripción";
+
+    sectionDescription.appendChild(labelDescription);
+
+    const inputDescription = document.createElement('textarea');
+    inputDescription.className = "form-control bg-transparent text-light";
+    inputDescription.placeholder = "Ingrese la descripción del video";
+    inputDescription.required = true;
+    inputDescription.id = "description";
+
+    sectionDescription.appendChild(inputDescription);
+    formVideo.appendChild(sectionDescription);
+
     //Create the button of cancel and redirect to playlist page
     const btnCancel = document.createElement('a');
-    btnCancel.href = "http://127.0.0.1:5500/html/videos/playlist.html?c=v";
+    btnCancel.href = "http://127.0.0.1:5500/html/videos/playlist.html?c=v&key=" + getKey();
     btnCancel.className = "btn btn-outline-secondary me-2";
     btnCancel.type = "button";
     btnCancel.innerText = "Volver";
     formVideo.appendChild(btnCancel);
 
-    //Create  the button of submit and add it to the form
+    //Create the button of submit and add it to the form
     const btnAddVideo = document.createElement('button');
     btnAddVideo.type = "submit";
-    btnAddVideo.className = "btn btn-outline-success"
+    btnAddVideo.className = "btn btn-outline-success";
     btnAddVideo.id = "save-btn";
     btnAddVideo.innerText = "Guardar";
 
@@ -96,6 +115,7 @@ const loadVideo = (data) => {
 
     document.getElementById('name').value = data.name;
     document.getElementById('url').value = data.url;
+    document.getElementById('description').value = data.description;
 
     document.getElementById('save-btn').setAttribute('data-id', `${data._id}`);
 }

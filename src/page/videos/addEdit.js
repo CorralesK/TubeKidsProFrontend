@@ -19,7 +19,7 @@ if (context == "f") {
         renderFormVideo();
 
         if (getID()) {
-            await get(getID()).then(video => {
+            await getVideo(getID()).then(video => {
                 loadVideo(video);
             })
                 .catch(error => {
@@ -60,19 +60,19 @@ if (context == "f") {
         const data = {
             id: document.getElementById('save-btn').getAttribute('data-id'),
             name: document.getElementById('name').value,
-            url: document.getElementById('url').value
+            url: document.getElementById('url').value,
+            description: document.getElementById('description').value,
+            playlistId: getKey()
         }
 
-        console.log(data);
-
-        save(data)
+        saveVideo(data)
             .then(() => {
-                window.location.href = "http://127.0.0.1:5500/html/videos/playlist.html?c=v";
+                document.location.href = "http://127.0.0.1:5500/html/videos/playlist.html?c=v&key=" + getKey();
             })
-            .catch(error => {
-                if (error.status == 404) {
+            .catch(err => {
+                if (err.status == 404) {
                     errorContainer.innerHTML = '<div class="alert text-danger"> No se ha encontrado el video. </div>';
-                } else if (error.status == 422) {
+                } else if (err.status == 422) {
                     errorContainer.innerHTML = '<div class="alert text-danger"> Ha ocurrido un error al guardar los cambios. </div>';
                 }
                 errorContainer.innerHTML = '<div class="alert text-danger"> Algo ha salido mal. Vuelva a intentarlo más tarde. </div>';

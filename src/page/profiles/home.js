@@ -51,18 +51,18 @@ if (context == "1") {
         const pin = parseInt(document.getElementById("pin").value);
 
         const handleError = () => document.getElementById('error-pin').style.display = 'block';
-        const redirectToPlaylist = "http://127.0.0.1:5500/html/videos/playlist.html";
+        const redirectToPlaylist = "http://127.0.0.1:5500/html/videos/playlists.html";
 
         if (ACTION === 'profile') {
             verifyPin(PROFILE_ID, pin)
                 .then(() => {
-                    document.location.href = redirectToPlaylist + "?c=p&key=" + PROFILE_ID;
+                    document.location.href = redirectToPlaylist + "?c=home&key=" + PROFILE_ID;
                 })
                 .catch(handleError);
         } else if (ACTION === 'admin') {
             verifyPinAdmin(pin)
                 .then(() => {
-                    document.location.href = redirectToPlaylist + "?c=v";
+                    document.location.href = redirectToPlaylist + "?c=admin";
                 })
                 .catch((error) => {
                     console.log(error);

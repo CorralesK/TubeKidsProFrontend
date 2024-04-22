@@ -1,4 +1,7 @@
 const REST_URL = "http://localhost:3001/api/videos";
+const QUERYS_URL = "http://localhost:4000/api/graphql";
+const TOKEN = sessionStorage.getItem("token");
+
 /**
  * 
  * @param {string} url 
@@ -13,7 +16,7 @@ const modifyPlaylist = (playlist) => {
             videoId = videoId.substring(0, ampersandPosition);
         }
 
-        video.url = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&loop=1&playlist=' + videoId;
+        video.url = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&loop=1';
         video.img = 'http://img.youtube.com/vi/' + videoId + '/maxresdefault.jpg';
     });
 
@@ -25,7 +28,7 @@ const modifyPlaylist = (playlist) => {
  * @param {string} id - Video ID to fetch a specific video.
  * @returns {Promise} - Promise object represents the video data.
  */
-const getOne = (id) => {
+const getVideo = (id) => {
     return new Promise((resolve, reject) => {
         const query = `query {
             video (id: "${id}") {
@@ -61,7 +64,7 @@ const getOne = (id) => {
  * @param {string} id - Playlist ID to fetch all video of this playlist.
  * @returns {Promise} - Promise object represents the videos data.
  */
-const getAll = (id) => {
+const getAllVideos = (id) => {
     return new Promise((resolve, reject) => {
         const query = `query {
             playlist (id: "${id}") {
@@ -102,7 +105,7 @@ const getAll = (id) => {
  * @param {Object} data - video data to be saved or updated.
  * @returns {Promise} - Promise object represents the success of the operation.
  */
-const save = (data) => {
+const saveVideo = (data) => {
     return new Promise((resolve, reject) => {
         let method = 'POST';
         let url = REST_URL;

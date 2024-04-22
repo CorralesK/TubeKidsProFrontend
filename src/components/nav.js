@@ -16,9 +16,9 @@ const renderNavManager = () => {
 
     // Create video link
     const videoLink = document.createElement('a');
-    videoLink.href = 'http://127.0.0.1:5500/html/videos/playlist.html?c=v';
+    videoLink.href = 'http://127.0.0.1:5500/html/videos/playlists.html?c=admin';
     videoLink.classList.add('nav-link', 'px-2', 'link-light');
-    videoLink.textContent = 'Video';
+    videoLink.textContent = 'Playlists';
 
     const videoListItem = document.createElement('li');
     videoListItem.appendChild(videoLink);
@@ -80,8 +80,71 @@ const renderNavManager = () => {
     navContainer.appendChild(dropdown);
 }
 
-const logOut = ()  => {
+const logOut = () => {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("2FA");
     window.location.href = "http://127.0.0.1:5500/html/auth/login.html";
+}
+
+const renderNavProfiles = (profileId) => {
+    const navElement = document.createElement('ul');
+    navElement.classList.add('nav', 'col-lg-auto', 'me-lg-auto', 'justify-content-center');
+
+    // Create inicio link
+    const homeLink = document.createElement('a');
+    homeLink.href = 'http://127.0.0.1:5500/html/index.html?c=1';
+    homeLink.classList.add('nav-link', 'px-2', 'link-light', 'fw-bold');
+    homeLink.textContent = 'Inicio';
+
+    const homeListItem = document.createElement('li');
+    homeListItem.appendChild(homeLink);
+
+    // Create video link
+    const videoLink = document.createElement('a');
+    videoLink.href = 'http://127.0.0.1:5500/html/videos/playlists.html?c=home&key=' + profileId;
+    videoLink.classList.add('nav-link', 'px-2', 'link-light', 'fw-bold');
+    videoLink.textContent = 'Playlists';
+
+    const videoListItem = document.createElement('li');
+    videoListItem.appendChild(videoLink);
+
+    // Create search input
+    const searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.classList.add('form-control', 'bg-transparent', 'text-light');
+    searchInput.placeholder = "Buscar videos";
+    searchInput.setAttribute('aria-label', "Buscar videos");
+    searchInput.setAttribute('aria-describedby', "button-addon2");
+    searchInput.id = 'search-input';
+
+    // Create search button
+    const searchButton = document.createElement('button');
+    searchButton.classList.add('btn', 'btn-outline-info');
+    searchButton.setAttribute('type', 'button');
+    searchButton.id = 'button-addon2';
+    searchButton.setAttribute('data-profile', `${profileId}`);
+    // Aquí agregamos el icono de búsqueda dentro del botón
+    searchButton.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+        </svg>
+    `;
+
+    // Create div to wrap input and button
+    const searchInputGroup = document.createElement('div');
+    searchInputGroup.classList.add('input-group', 'mb-3', 'text-light');
+    searchInputGroup.appendChild(searchInput);
+    searchInputGroup.appendChild(searchButton);
+
+    // Create list item for search input group
+    const searchListItem = document.createElement('li');
+    searchListItem.appendChild(searchInputGroup);
+
+    // Add list items to navigation
+    navElement.appendChild(homeListItem);
+    navElement.appendChild(videoListItem);
+
+    const navContainer = document.getElementById('nav');
+    navContainer.appendChild(navElement);
+    navContainer.appendChild(searchListItem);
 }

@@ -19,6 +19,7 @@ const renderPlaylist = (playlist) => {
         const link = document.createElement('a');
         link.href = video.url;
         link.className = 'btn-dark text-decoration-none';
+        link.target = "_blank";
         
         const img = document.createElement('img');
         img.src = video.img;
@@ -29,10 +30,18 @@ const renderPlaylist = (playlist) => {
         link.appendChild(img);
 
         const nameVideo =  document.createElement('h3');
-        nameVideo.className = "card-title nav-link mt-2 mb-3 px-2 link-light";
-        nameVideo.textContent = video.name;
+        nameVideo.className = "card-title nav-link mt-2 px-2 link-light";
+        nameVideo.innerHTML = `<strong>${video.name}</strong>`;
 
         link.appendChild(nameVideo);
+
+        if (video.description) {
+            const descriptionPreview = document.createElement('p');
+            descriptionPreview.className = 'text-secondary mb-3 px-2';
+            descriptionPreview.textContent = video.description.split(' ').slice(0, 10).join(' ');
+            link.appendChild(descriptionPreview);
+        }
+
         card.appendChild(link);
         div.appendChild(card);
 

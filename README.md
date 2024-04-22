@@ -23,8 +23,8 @@ TubeKids Frontend is the client-side application for TubeKids, a platform design
 
 ## Installation and Usage
 
-1. Clone this repository: `git clone https://github.com/CorralesK/TubeKidsFrontend.git`
-2. Navigate to the project directory: `cd TubeKidsFrontend`
+1. Clone this repository: `git clone https://github.com/CorralesK/TubeKidsProFrontend.git`
+2. Navigate to the project directory: `cd TubeKidsProFrontend`
 
 ## License
 This project is licensed under the MIT License.

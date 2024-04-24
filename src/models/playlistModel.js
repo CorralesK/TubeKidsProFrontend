@@ -154,13 +154,13 @@ const getAll = () => {
 const savePlaylist = (data) => {
     return new Promise((resolve, reject) => {
         let method = 'POST';
-        let url;
+        let url = REST_URL_PLAYLIST;
 
         if (data.id) {
             method = 'PATCH';
-            url = `${REST_URL_PLAYLIST}?_id=${data.id}`;
+            url += `?_id=${data.id}`;
         }
-
+        
         axios({
             method: method,
             url: url,

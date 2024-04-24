@@ -47,10 +47,15 @@ if (!context) {
             .then(playlist => {
                 renderHeader("Playlist " + playlist.name);
                 renderPlaylist(playlist.videos);
+
+                if (playlist.videos.length === 0) {
+                    document.getElementById("message").style.display = 'block';
+                    document.getElementById("message").textContent = "No hay videos registrados para esta lista";
+                }
             })
             .catch(error => {
                 document.getElementById("message").style.display = 'block';
-                document.getElementById("message").textContent = "No hay videos registrados para esta cuenta";
+                document.getElementById("message").textContent = "No hay videos registrados para esta lista";
             });
     }
     showPlalist();

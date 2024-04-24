@@ -19,9 +19,9 @@ if (context == "v") {
                     cardVideo.appendChild(buttons.cloneNode(true));
                 });
 
-                if (playlist == "") {
+                if (playlist.videos.length === 0) {
                     document.getElementById("message").style.display = 'block';
-                    document.getElementById("message").textContent = "No hay videos registrados para esta cuenta";
+                    document.getElementById("message").textContent = "No hay videos registrados para esta lista";
                 }
             })
             .catch(error => {

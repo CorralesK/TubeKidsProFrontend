@@ -38,28 +38,41 @@ const renderFormPlaylist = (profiles) => {
     sectionProfiles.className = "mb-3";
 
     const labelProfiles = document.createElement('label');
-    labelProfiles.setAttribute("for", "profiles");
     labelProfiles.className = "form-label";
     labelProfiles.innerText = "Perfiles con acceso";
 
     sectionProfiles.appendChild(labelProfiles);
 
-    // Create a select element for profiles
-    const selectProfiles = document.createElement('select');
-    selectProfiles.className = "form-select bg-transparent text-light";
-    selectProfiles.id = "profiles";
-    selectProfiles.multiple = true;
-    selectProfiles.required = true;
-
-    // Populate select with profiles
+    // Create checkboxes for each profile
     profiles.forEach(profile => {
-        const option = document.createElement('option');
-        option.value = profile._id;
-        option.innerText = profile.name;
-        selectProfiles.appendChild(option);
+        const checkboxContainer = document.createElement('div');
+        checkboxContainer.className = "form-check";
+
+        const checkbox = document.createElement('input');
+        checkbox.type = "checkbox";
+        checkbox.className = "form-check-input";
+        checkbox.value = profile._id;
+        checkbox.id = `profile_${profile._id}`; // Unique ID for each checkbox
+
+        const label = document.createElement('label');
+        label.className = "form-check-label";
+        label.setAttribute("for", `profile_${profile._id}`);
+        label.innerText = profile.name;
+
+        checkboxContainer.appendChild(checkbox);
+        checkboxContainer.appendChild(label);
+
+        sectionProfiles.appendChild(checkboxContainer);
     });
 
-    sectionProfiles.appendChild(selectProfiles);
+    //Menssage error
+    const  messageError = document.createElement('p');
+    messageError.className = "text-danger";
+    messageError.style.display="none";
+    messageError.id ="profilesError"
+    messageError.innerText = "Debe seleccionar al menos un perfil";
+    sectionProfiles.appendChild(messageError);
+
     formPlaylist.appendChild(sectionProfiles);
 
     //Create the button of cancel and redirect to playlist page
@@ -85,7 +98,6 @@ const renderFormPlaylist = (profiles) => {
     container.appendChild(section);
 }
 
-
 /**
  * Pre-populates playlist form with provided data for editing.
  * 
@@ -97,12 +109,9 @@ const loadPlaylist = (data) => {
     document.getElementById('name').value = data.name;
 
     // Select the profiles that have access to the playlist
-    const selectProfiles = document.getElementById('profiles');
     const playlistProfiles = data.profiles.map(profile => profile._id);
-    Array.from(selectProfiles.options).forEach(option => {
-        if (playlistProfiles.includes(option.value)) {
-            option.selected = true;
-        }
+    playlistProfiles.forEach(profileId => {
+        document.getElementById(`profile_${profileId}`).checked = true;
     });
 
     document.getElementById('save-btn').setAttribute('data-id', `${data._id}`);

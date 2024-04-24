@@ -40,15 +40,23 @@ if (context == "f") {
     const addPlaylistFormListener = () => {
         document.getElementById('playlist-form').addEventListener('submit', (e) => {
             e.preventDefault();
-    
+
             const data = {
                 id: document.getElementById('save-btn').getAttribute('data-id'),
                 name: document.getElementById('name').value
             };
-    
-            const selectedProfiles = Array.from(document.getElementById('profiles').selectedOptions).map(option => option.value);
+
+            // Obtener los ID de los perfiles seleccionados
+            const selectedProfiles = Array.from(document.querySelectorAll('input[type=checkbox]:checked'))
+                .map(checkbox => checkbox.value);
+
+            if (selectedProfiles.length === 0) {
+                document.getElementById('profilesError').style.display = "block";
+                return;
+            }
+
             data.profiles = selectedProfiles;
-    
+
             savePlaylist(data)
                 .then(() => {
                     document.location.href = "http://127.0.0.1:5500/html/videos/playlists.html?c=admin";
